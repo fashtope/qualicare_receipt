@@ -96,6 +96,21 @@ header {
 }
 
 /* Editable content outline reset */
+.service-type-select {
+    border: none;
+    border-bottom: 1px dotted #ccc;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: bold;
+    padding: 2px 5px;
+    width: 150px;
+    background: transparent;
+}
+
+.service-type-select:focus {
+    outline: none;
+}
+
 [contenteditable="true"]:hover {
     background-color: #f9f9f9;
     outline: 1px dashed #ccc;
@@ -277,11 +292,43 @@ footer {
     }
 }
 
+/* Print error screen styles */
+.print-error-overlay {
+    display: none;
+}
+
 /* Print Styles */
 @media print {
+
+    /* Handle invalid print state */
+    body.print-invalid .invoice-container {
+        display: none !important;
+    }
+
+    body.print-invalid .print-error-overlay {
+        display: block !important;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding-top: 100px;
+    }
+
+    body.print-invalid .print-error-overlay h1 {
+        color: #d9534f;
+        margin-bottom: 20px;
+    }
+
+    @page {
+        margin: 0;
+    }
+
+    .hide-on-print {
+        display: none !important;
+    }
+
     body {
         background-color: white;
-        padding: 0;
+        padding: 20mm;
+        /* Add padding back to body since we removed page margins */
     }
 
     .invoice-container {

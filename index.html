@@ -7,12 +7,20 @@
     <title>Qualicare Invoice</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Times+New+Roman&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
     <div class="no-print controls">
-        <button onclick="window.print()">🖨️ Print Invoice / Save as PDF</button>
+        <button onclick="printInvoice()">🖨️ Print Invoice / Save as PDF</button>
         <button onclick="addRow()">➕ Add Custom Item</button>
+    </div>
+
+    <!-- Error message shown only when printing an invalid invoice via Ctrl+P -->
+    <div class="print-error-overlay no-print">
+        <h1>Error: Incomplete Invoice</h1>
+        <p>Please fill in all required fields (Date, Invoice No, S/O No., Service Type, TIN No.) and enter an amount for
+            at least one item before printing.</p>
     </div>
 
     <div class="invoice-container">
@@ -24,22 +32,33 @@
                 <input type="file" id="logo-upload" class="no-print" accept="image/*" onchange="uploadLogo(event)">
 
                 <div class="company-address" contenteditable="true">
-                    11 Kaara Street<br>
+                    27 Kaara Street<br>
                     Ajao Estate, Lagos-Nigeria
                 </div>
             </div>
             <div class="header-right">
                 <div class="header-row">
                     <span>Date:</span>
-                    <input type="text" placeholder="Enter Date" style="font-weight: bold;">
+                    <input type="text" id="date-input" placeholder="Enter Date" style="font-weight: bold;">
                 </div>
                 <div class="header-row">
                     <span>Invoice No:</span>
-                    <input type="text" placeholder="Enter Invoice No" style="font-weight: bold;">
+                    <input type="text" id="invoice-no-input" placeholder="Enter Invoice No" style="font-weight: bold;">
+                </div>
+                <div class="header-row">
+                    <span>S/O No:</span>
+                    <input type="text" id="so-no-input" placeholder="Enter S/O No" style="font-weight: bold;">
+                </div>
+                <div class="header-row">
+                    <span>Service Type:</span>
+                    <select class="service-type-select" id="service-type-select">
+                        <option value="IOR">IOR</option>
+                        <option value="EOR">EOR</option>
+                    </select>
                 </div>
                 <div class="header-row">
                     <span>TIN No:</span>
-                    <input type="text" value="16414971-0001" style="font-weight: bold;">
+                    <input type="text" id="tin-no-input" value="16414971-0001" style="font-weight: bold;">
                 </div>
             </div>
         </header>
