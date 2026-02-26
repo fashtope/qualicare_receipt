@@ -355,6 +355,15 @@ footer {
 
     td input[type="number"] {
         outline: none;
+        -moz-appearance: textfield;
+        /* Firefox */
+    }
+
+    /* Hide number input arrows/spinners in print */
+    td input[type="number"]::-webkit-outer-spin-button,
+    td input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
     }
 
     /* Make table borders strictly black for printing */
