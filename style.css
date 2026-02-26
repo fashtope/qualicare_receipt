@@ -38,8 +38,11 @@ body {
 /* Invoice Container (A4 Size approximation) */
 .invoice-container {
     background-color: white;
-    width: 210mm; /* A4 width */
-    min-height: 297mm; /* A4 height */
+    width: 100%;
+    max-width: 210mm;
+    /* A4 width */
+    min-height: 297mm;
+    /* A4 height */
     margin: 0 auto;
     padding: 20mm;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -97,6 +100,7 @@ header {
     background-color: #f9f9f9;
     outline: 1px dashed #ccc;
 }
+
 [contenteditable="true"]:focus {
     background-color: #fff;
     outline: 1px solid #0056b3;
@@ -116,7 +120,8 @@ table {
     margin-bottom: 30px;
 }
 
-th, td {
+th,
+td {
     border: 1px solid #000;
     padding: 6px 8px;
     text-align: left;
@@ -124,7 +129,8 @@ th, td {
 }
 
 th {
-    font-weight: normal; /* In the original they are quite normal looking */
+    font-weight: normal;
+    /* In the original they are quite normal looking */
 }
 
 .col-desc {
@@ -133,7 +139,8 @@ th {
 
 .col-amt {
     width: 25%;
-    text-align: left; /* Keep left alignment, inputs will align left */
+    text-align: left;
+    /* Keep left alignment, inputs will align left */
 }
 
 .col-action {
@@ -150,15 +157,18 @@ td input[type="number"] {
     font-size: inherit;
     background: transparent;
 }
+
 td input[type="number"]:focus {
     outline: 1px solid #0056b3;
 }
 
-.amount-input, #vat-input {
+.amount-input,
+#vat-input {
     min-width: 60px;
 }
 
-td#subtotal, td#grand-total {
+td#subtotal,
+td#grand-total {
     text-align: left;
 }
 
@@ -218,6 +228,55 @@ footer {
     background-color: #cc0000;
 }
 
+/* Responsive Styles for Mobile/Tablet */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .invoice-container {
+        padding: 15px;
+        min-height: auto;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header-left .logo {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .header-right {
+        padding-top: 20px;
+        width: 100%;
+    }
+
+    footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .footer-right {
+        width: 100%;
+        text-align: left;
+    }
+
+    .signature-line {
+        width: 100%;
+    }
+
+    /* Make table scrollable horizontally on small screens */
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
 /* Print Styles */
 @media print {
     body {
@@ -252,10 +311,11 @@ footer {
     }
 
     /* Make table borders strictly black for printing */
-    th, td {
+    th,
+    td {
         border: 1px solid #000;
     }
-    
+
     .col-action {
         display: none;
     }
