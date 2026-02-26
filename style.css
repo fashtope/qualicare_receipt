@@ -1,0 +1,262 @@
+/* Reset and Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Times New Roman", Times, serif;
+    background-color: #f4f4f4;
+    color: #000;
+    font-size: 14px;
+    line-height: 1.4;
+    padding: 20px;
+}
+
+/* Controls (Not printed) */
+.controls {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.controls button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 0 10px;
+    cursor: pointer;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+.controls button:hover {
+    background-color: #004494;
+}
+
+/* Invoice Container (A4 Size approximation) */
+.invoice-container {
+    background-color: white;
+    width: 210mm; /* A4 width */
+    min-height: 297mm; /* A4 height */
+    margin: 0 auto;
+    padding: 20mm;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.header-left .logo {
+    max-width: 250px;
+    height: auto;
+    margin-bottom: 5px;
+    display: block;
+}
+
+#logo-upload {
+    margin-bottom: 15px;
+    font-size: 12px;
+}
+
+.company-address {
+    font-size: 12px;
+}
+
+.header-right {
+    font-size: 12px;
+    padding-top: 30px;
+}
+
+.header-row {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.header-row span {
+    width: 70px;
+}
+
+.header-row input {
+    border: none;
+    border-bottom: 1px dotted #ccc;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 2px 5px;
+    width: 150px;
+}
+
+/* Editable content outline reset */
+[contenteditable="true"]:hover {
+    background-color: #f9f9f9;
+    outline: 1px dashed #ccc;
+}
+[contenteditable="true"]:focus {
+    background-color: #fff;
+    outline: 1px solid #0056b3;
+}
+
+/* Billing Info */
+.billing-info {
+    margin-bottom: 20px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+th, td {
+    border: 1px solid #000;
+    padding: 6px 8px;
+    text-align: left;
+    font-size: 12px;
+}
+
+th {
+    font-weight: normal; /* In the original they are quite normal looking */
+}
+
+.col-desc {
+    width: 75%;
+}
+
+.col-amt {
+    width: 25%;
+    text-align: left; /* Keep left alignment, inputs will align left */
+}
+
+.col-action {
+    width: 50px;
+    text-align: center;
+    border: none !important;
+}
+
+td input[type="number"] {
+    width: 100%;
+    border: none;
+    text-align: left;
+    font-family: inherit;
+    font-size: inherit;
+    background: transparent;
+}
+td input[type="number"]:focus {
+    outline: 1px solid #0056b3;
+}
+
+.amount-input, #vat-input {
+    min-width: 60px;
+}
+
+td#subtotal, td#grand-total {
+    text-align: left;
+}
+
+/* Payment Details */
+.payment-details {
+    font-size: 11px;
+    margin-bottom: 40px;
+    line-height: 1.4;
+}
+
+.payment-details p {
+    margin-bottom: 15px;
+}
+
+/* Footer */
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 11px;
+}
+
+.signature-section {
+    margin-bottom: 15px;
+}
+
+.signature-section strong {
+    text-decoration: underline;
+}
+
+.contact-details {
+    line-height: 1.5;
+}
+
+.footer-right {
+    text-align: center;
+}
+
+.signature-line {
+    border-top: 1px dashed #000;
+    padding-top: 5px;
+    width: 150px;
+    font-size: 11px;
+}
+
+.remove-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 3px 6px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.remove-btn:hover {
+    background-color: #cc0000;
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background-color: white;
+        padding: 0;
+    }
+
+    .invoice-container {
+        box-shadow: none;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    /* Remove interactive styles */
+    .header-row input {
+        border-bottom: none;
+    }
+
+    [contenteditable="true"]:hover,
+    [contenteditable="true"]:focus {
+        background-color: transparent;
+        outline: none;
+    }
+
+    td input[type="number"] {
+        outline: none;
+    }
+
+    /* Make table borders strictly black for printing */
+    th, td {
+        border: 1px solid #000;
+    }
+    
+    .col-action {
+        display: none;
+    }
+}

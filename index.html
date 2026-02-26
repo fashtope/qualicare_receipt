@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qualicare Invoice</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Times+New+Roman&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="no-print controls">
+        <button onclick="window.print()">🖨️ Print Invoice / Save as PDF</button>
+        <button onclick="addRow()">➕ Add Custom Item</button>
+    </div>
+
+    <div class="invoice-container">
+        <!-- Header -->
+        <header>
+            <div class="header-left">
+                <!-- Using a text placeholder for logo. For real usage they can replace the src -->
+                <img src="https://via.placeholder.com/250x70?text=Upload+Qualicare+Logo+Here" alt="Qualicare Logo"
+                    class="logo" id="logo-img">
+                <input type="file" id="logo-upload" class="no-print" accept="image/*" onchange="uploadLogo(event)">
+
+                <div class="company-address" contenteditable="true">
+                    11 Kaara Street<br>
+                    Ajao Estate, Lagos-Nigeria
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="header-row">
+                    <span>Date:</span>
+                    <input type="text" placeholder="Enter Date" style="font-weight: bold;">
+                </div>
+                <div class="header-row">
+                    <span>Invoice No:</span>
+                    <input type="text" placeholder="Enter Invoice No" style="font-weight: bold;">
+                </div>
+                <div class="header-row">
+                    <span>TIN No:</span>
+                    <input type="text" value="16414971-0001" style="font-weight: bold;">
+                </div>
+            </div>
+        </header>
+
+        <!-- Billing Info -->
+        <section class="billing-info" contenteditable="true">
+            Ross Willmach Turnkey Export UK<br>
+            Title: IOR AND DELIVERY OF STCOMP A TECHNOLOGY COMPANY INC SHIPMENT (240628-364704)<br>
+            FOB Value<br>
+            Delivery<br>
+            Weight
+        </section>
+
+        <!-- Items Table -->
+        <table id="invoice-table">
+            <thead>
+                <tr>
+                    <th class="col-desc">Item Description</th>
+                    <th class="col-amt">AMT (USD)</th>
+                    <th class="col-action no-print">Action</th>
+                </tr>
+            </thead>
+            <tbody id="items-body">
+                <tr class="item-row preloaded">
+                    <td contenteditable="true">Import duty and taxes</td>
+                    <td><input type="number" class="amount-input" oninput="calculateTotals()" placeholder="0.00"></td>
+                    <td class="col-action no-print"></td>
+                </tr>
+                <tr class="item-row preloaded">
+                    <td contenteditable="true">Marine Insurance</td>
+                    <td><input type="number" class="amount-input" oninput="calculateTotals()" placeholder="0.00"></td>
+                    <td class="col-action no-print"></td>
+                </tr>
+                <tr class="item-row preloaded">
+                    <td contenteditable="true">Form M and PAAR</td>
+                    <td><input type="number" class="amount-input" oninput="calculateTotals()" placeholder="0.00"></td>
+                    <td class="col-action no-print"></td>
+                </tr>
+                <tr class="item-row preloaded">
+                    <td contenteditable="true">PAAR AWB</td>
+                    <td><input type="number" class="amount-input" oninput="calculateTotals()" placeholder="0.00"></td>
+                    <td class="col-action no-print"></td>
+                </tr>
+                <tr class="item-row preloaded">
+                    <td contenteditable="true">NAFDAC and FAAN</td>
+                    <td><input type="number" class="amount-input" oninput="calculateTotals()" placeholder="0.00"></td>
+                    <td class="col-action no-print"></td>
+                </tr>
+                <tr class="item-row preloaded">
+                    <td contenteditable="true">Customs brokerage</td>
+                    <td><input type="number" class="amount-input" oninput="calculateTotals()" placeholder="0.00"></td>
+                    <td class="col-action no-print"></td>
+                </tr>
+                <tr class="item-row preloaded">
+                    <td contenteditable="true">Delivery</td>
+                    <td><input type="number" class="amount-input" oninput="calculateTotals()" placeholder="0.00"></td>
+                    <td class="col-action no-print"></td>
+                </tr>
+                <tr class="item-row preloaded">
+                    <td contenteditable="true">IOR</td>
+                    <td><input type="number" class="amount-input" oninput="calculateTotals()" placeholder="0.00"></td>
+                    <td class="col-action no-print"></td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr class="summary-row">
+                    <td>Total</td>
+                    <td id="subtotal">0.00</td>
+                    <td class="col-action no-print"></td>
+                </tr>
+                <tr class="summary-row">
+                    <td>VAT <span class="no-print" style="font-size: 0.8em; font-weight: normal; color: gray;">(Enter
+                            exact amount or leave empty)</span></td>
+                    <td><input type="number" id="vat-input" oninput="calculateTotals()" placeholder="0.00"></td>
+                    <td class="col-action no-print"></td>
+                </tr>
+                <tr class="summary-row grand-total">
+                    <td>Grand Total</td>
+                    <td id="grand-total">0.00</td>
+                    <td class="col-action no-print"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Payment Details -->
+        <section class="payment-details" contenteditable="true">
+            <p>PAYMENT TO BE MADE TO QUALICARE GLOBAL LOGISTICS LIMITED<br>
+                USD BANK DETAILS<br>
+                CORRESPONDENT BANK<br>
+                <span style="color: red;">BANK NAME: CITIBANK N.A</span><br>
+                111 WALL STREET NEW YORK, NEW YORK 10043<br>
+                SWIFT CODE: CITIUS33<br>
+                ABA NUMBER: 021000089
+            </p>
+
+            <p>FOR CREDIT OF:<br>
+                ACCOUNT NAME: ZENITH BANK PLC<br>
+                ACCOUNT NUMBER: 36143884<br>
+                ADDRESS: PLOT 84, AJOSE ADEOGUN STREET, VICTORIA ISLAND LAGOS, NIGERIA.<br>
+                SWIFT CODE: ZEIBGNLA</p>
+
+            <p>FOR FINAL CREDIT OF: QUALICARE GLOBAL LOGISTICS LIMITED<br>
+                ACCOUNT NUMBER: 5070366944.</p>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-left">
+                <div class="signature-section" contenteditable="true">
+                    <span style="color: red;">Authorised Person</span><br>
+                    <strong>Judith. A Okpara</strong>
+                </div>
+                <div class="contact-details" contenteditable="true">
+                    Contact Details:<br>
+                    07036241976, 08189408918<br>
+                    <span style="color: navy; text-decoration: underline;">accounts@qualicarelogistics.com</span>
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="signature-line">
+                    <span style="color: red;">Authorised Signature</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
