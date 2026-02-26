@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qualicare Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css">
+
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- SheetJS for Excel Exports -->
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header class="admin-header">
+            <div>
+                <h1>Qualicare Receipts Dashboard</h1>
+                <p>View, print, and export saved receipts from the database.</p>
+            </div>
+
+            <div class="admin-controls no-print">
+                <button onclick="window.print()" class="btn btn-secondary">🖨️ Print View</button>
+                <button onclick="exportToExcel()" class="btn btn-primary">📊 Export to Excel</button>
+            </div>
+        </header>
+
+        <main>
+            <!-- Loading Indicator -->
+            <div id="loading" class="alert alert-info">
+                Loading data from database...
+            </div>
+
+            <!-- Error container -->
+            <div id="error-message" class="alert alert-error" style="display: none;"></div>
+
+            <!-- Receipts Data Table -->
+            <div class="table-responsive">
+                <table id="receipts-table" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Invoice No.</th>
+                            <th>S/O No.</th>
+                            <th>Total Amount ($)</th>
+                            <th>Created At</th>
+                        </tr>
+                    </thead>
+                    <tbody id="receipts-tbody">
+                        <!-- Data will be populated here via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="empty-state" class="alert alert-warning" style="display: none;">
+                No receipts found in the database yet.
+            </div>
+        </main>
+
+        <footer class="admin-footer no-print">
+            <a href="index.html">← Back to Print Receipt</a>
+        </footer>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+
+</html>
