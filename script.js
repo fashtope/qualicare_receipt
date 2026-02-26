@@ -59,6 +59,20 @@ function uploadLogo(event) {
     }
 }
 
+// Function to handle signature upload locally to view in preview
+function uploadSignature(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const sigImg = document.getElementById('signature-img');
+            sigImg.src = e.target.result;
+            sigImg.style.display = 'block'; // Show the image once uploaded
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
 // Initial calculation
 calculateTotals();
 

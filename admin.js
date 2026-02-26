@@ -52,7 +52,6 @@ function renderTable(data) {
         const createdFormatted = dateObj.toLocaleString();
 
         tr.innerHTML = `
-            <td>${row.id || '-'}</td>
             <td>${row.date || '-'}</td>
             <td><strong>${row.invoice_no || '-'}</strong></td>
             <td>${row.so_no || '-'}</td>
@@ -121,7 +120,6 @@ function exportToExcel() {
 
         // Map the records to a cleaner array of objects for Excel columns
         const excelData = records.map(record => ({
-            "System ID": record.id,
             "Invoice Date": record.date,
             "Invoice Number": record.invoice_no,
             "S/O Number": record.so_no,
